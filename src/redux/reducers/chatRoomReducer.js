@@ -1,0 +1,54 @@
+import {
+    CONNECT_WEB_SOCKET,
+    CONNECT_WEB_SOCKET_SUCCESS,
+    CONNECT_WEB_SOCKET_FAIL,
+    SET_ONLINE_COUNT
+} from '../actionTypes'
+
+const initState = {
+    messageBox: [],
+    webSocket: '',
+    onlineCount: 0,
+    connectStatus: '',
+}
+
+const chatRoomReducer = (state = initState, action) => {
+    switch(action.type){
+        case CONNECT_WEB_SOCKET:{
+            return {
+                ...state,
+                connectStatus: 'connecting'
+            }
+        }
+        case CONNECT_WEB_SOCKET_SUCCESS:{
+            return{
+                ...state,
+                connectStatus: 'connected',
+                webSocket: action.payload
+            }
+        }
+        case CONNECT_WEB_SOCKET_FAIL:{
+            return{
+                ...state,
+                connectStatus: 'disconnect',
+                webSocket: action.payload
+            }
+        }
+        case SET_ONLINE_COUNT:{
+            console.log(action);
+            return{
+                ...state,
+                onlineCount: action.payload
+            }
+        }
+        case 'SET_MESSAGE_BOX':{
+            return{
+                ...state,
+                messageBox: state.messageBox.concat([action.payload])
+            }
+        }
+        default: return state;
+    }
+}
+
+export default chatRoomReducer;

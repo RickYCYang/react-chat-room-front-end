@@ -37,6 +37,7 @@ export function* loginRequest(action) {
       }
     });
     yield setCookie('token', result.token);
+    yield setCookie('userName', result.userName);
     yield put(push('/'));
   }
 }

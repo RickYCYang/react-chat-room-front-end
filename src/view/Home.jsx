@@ -31,7 +31,15 @@ const Home = () => {
         delCookie('userName');
         dispatch(push('/login'));
     }
-        
+
+    useEffect(() => {
+        //localStorage.setItem('myData', '123');
+        /*
+        const data = localStorage.getItem('myData')
+        console.log('localStorage', data);
+        */
+    })
+    
     return (
     <>
     {(token)?
@@ -42,7 +50,7 @@ const Home = () => {
                     <TopAppBarIcon navIcon tabIndex={0}>
                         <MaterialIcon hasRipple icon='menu' onClick={() => console.log('click')}/>
                     </TopAppBarIcon>
-                    <TopAppBarTitle>Welcome {userName}!, {onlineCount} people online.</TopAppBarTitle>
+                    <TopAppBarTitle>Welcome {userName}, Online People: {onlineCount}</TopAppBarTitle>
                 </TopAppBarSection>
                 <TopAppBarSection align='end' role='toolbar'>
                     <TopAppBarIcon actionItem tabIndex={0}>

@@ -2,11 +2,12 @@ import React, {useState, useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {Cell, Grid, Row} from '@material/react-layout-grid';
 import MaterialIcon from '@material/react-material-icon';
-
-
+import { getCookie } from '../../../ApiService';
+import MessageBox from './MessageBox';
 
 const MessagePanel = () => {
     const {messageBox} = useSelector(state => state.chatRoomReducer);
+    const userName = getCookie('userName');
     let messagesEnd;
 
     useEffect(() => {
@@ -17,12 +18,15 @@ const MessagePanel = () => {
         <div id="messagePanel-bg">
             <div id="messagePanel">
                 {
-                    messageBox.map(item => (
-                        <Row id="messageBox" key={"row" + item.useName + item.timestamp}>
-                            <Cell columns={12} key={"col" + item.useName + item.timestamp}>
-                                <div key={item}>
+                    messageBox.map(message => (
+                        <Row key={"row" + message.userName + message.timestamp}>
+                            <Cell columns={12}>
+                                <div className={(userName === message.useName)? "messageBox_mine": "messageBox_other"}>
                                     <MaterialIcon role="button" icon="account_circle" className="account_icon"/>
-                                    <span className="message">{item.useName}({item.timestamp}): {item.message}</span>
+                                    <span>{message.useName}({message.timestamp})</span>
+                                    <div className={(userName === message.useName)? "message_mine": "message_other"}>
+                                        {message.message}
+                                    </div>
                                 </div>
                             </Cell>
                         </Row>

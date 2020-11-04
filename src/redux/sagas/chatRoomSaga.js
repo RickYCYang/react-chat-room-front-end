@@ -12,11 +12,16 @@ import {
 
 } from '../actionTypes';
 import webSocketClient from 'socket.io-client'
+import {
+    PROD_HOST_NAME,
+    DEV_HOST_NAME
+} from '../../config'
+
 
 
 export function *connectWebSocket(action) {
     console.log('connectWebSocket', action);
-    let webSocket = yield webSocketClient('http://localhost:3000');
+    let webSocket = yield webSocketClient(PROD_HOST_NAME); //webSocketClient('http://localhost:3000');
     if(webSocket){
         yield put({
             type: CONNECT_WEB_SOCKET_SUCCESS,

@@ -1,6 +1,12 @@
-import Cookies from 'js-cookie'
+import Cookies from 'js-cookie';
+import {
+    PROD_HOST_NAME,
+    DEV_HOST_NAME,
+    PROD_ACCESS_CONTROL_ALLOW_ORIGIN,
+    DEV_ACCESS_CONTROL_ALLOW_ORIGIN
+} from './config'
 
-const hostName = "http://localhost:3000"
+const hostName = "https://express-chat-room-back-end.herokuapp.com" //"http://localhost:3000"
 const token =  getCookie("token");
 
 export function getCookie(key) {    
@@ -17,7 +23,7 @@ export let delCookie = (key) => {
 
 export let fetchGet = (webApi) => {
     //console.log(hostName + "/" + webApi);
-    return fetch(hostName + "/" + webApi,{
+    return fetch(DEV_HOST_NAME + "/" + webApi,{
         method: 'GET',
         dataType: 'jsonp',
         headers: {
@@ -37,12 +43,12 @@ export let fetchGet = (webApi) => {
 }
 
 export let fetchPost = (webApi, data) => {
-    console.log("web api", hostName + "/" + webApi);
-    return fetch(hostName + "/" + webApi,{
+    //console.log("web api", PROD_HOST_NAME + "/" + webApi);
+    return fetch(PROD_HOST_NAME + "/" + webApi,{
         method: 'POST',
         //mode: 'cors',
         headers: {
-            'Access-Control-Allow-Origin': 'http://localhost:3001',
+            'Access-Control-Allow-Origin': DEV_ACCESS_CONTROL_ALLOW_ORIGIN,
             'Accept': 'application/json',
             'content-type': 'application/json',
             'Authorization': token

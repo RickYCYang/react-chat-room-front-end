@@ -35,7 +35,6 @@ const chatRoomReducer = (state = initState, action) => {
             }
         }
         case SET_ONLINE_COUNT:{
-            console.log(action);
             return{
                 ...state,
                 onlineCount: action.payload

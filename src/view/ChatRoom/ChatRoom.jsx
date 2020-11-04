@@ -24,7 +24,6 @@ const ChatRoom = ({webSocket, onlineCount, connectWebSocket, setOnlineCount}) =>
 
     const initWebSocket = () => {
         console.log('initWebSocket');
-
         webSocket.on('online', onlineCount => {
             //console.log('onlineCount', onlineCount);
             setOnlineCount(onlineCount)

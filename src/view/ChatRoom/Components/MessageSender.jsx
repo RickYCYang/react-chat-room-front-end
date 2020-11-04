@@ -44,10 +44,10 @@ const MessageSender = () => {
 
     useEffect(() => {
         if(webSocket){
-            document.addEventListener('keydown', enterClick);
+            document.addEventListener('keypress', enterClick);
         }
         return () => {
-            document.removeEventListener('keydown', enterClick)
+            document.removeEventListener('keypress', enterClick)
         }
     }, [webSocket])
 
